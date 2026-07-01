@@ -102,7 +102,7 @@ export default function CinematicScene01({ language }: Props) {
           style={{ width: 240, height: 240, opacity: 0 }}>
           <div className="absolute inset-0 rounded-full animate-pulse"
             style={{ background: "radial-gradient(circle, rgba(176,141,87,0.2) 0%, transparent 70%)" }} />
-          <img src="/src/assets/images/signature_cookie_1782746124910.jpg"
+          <img src="/images/signature_cookie_1782746124910.jpg"
             alt="Signature Cookie" className="w-full h-full object-cover rounded-full shadow-2xl"
             style={{ border: "2px solid rgba(176,141,87,0.4)" }} />
         </div>

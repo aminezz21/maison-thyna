@@ -2,10 +2,10 @@ import { Ingredient, Experience, Product, Testimonial } from "./types";
 
 // Dynamic image imports or absolute paths
 export const IMAGES = {
-  hero: "/src/assets/images/maison_thyna_hero_1782746110527.jpg",
-  signatureCookie: "/src/assets/images/signature_cookie_1782746124910.jpg",
-  artisanWorkshop: "/src/assets/images/artisan_workshop_1782746137737.jpg",
-  localIngredients: "/src/assets/images/local_ingredients_1782746150544.jpg",
+  hero: "/images/maison_thyna_hero_1782746110527.jpg",
+  signatureCookie: "/images/signature_cookie_1782746124910.jpg",
+  artisanWorkshop: "/images/artisan_workshop_1782746137737.jpg",
+  localIngredients: "/images/local_ingredients_1782746150544.jpg",
 };
 
 export const INGREDIENTS: Ingredient[] = [

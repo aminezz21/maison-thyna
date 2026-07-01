@@ -62,7 +62,7 @@ export default function CinematicScene02({ language }: Props) {
         {/* BG Image */}
         <div ref={bgRef} className="absolute inset-0 z-0"
           style={{ transform: "scale(1.15)", filter: "brightness(0.3)" }}>
-          <img src="/src/assets/images/carrot_cake.png"
+          <img src="/images/carrot_cake.png"
             alt="Maison THYNA traditional organic carrot cake"
             className="w-full h-full object-cover" />
         </div>
