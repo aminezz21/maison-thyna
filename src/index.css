@@ -1,0 +1,508 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Italianno&family=Jost:wght@200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F4EEE2;
+  --color-secondary-cream: #ECE3D2;
+  --color-olive: #5C6B3D;
+  --color-dark-olive: #3F4A29;
+  --color-gold: #B08D57;
+  --color-terracotta: #8B4226;
+  --color-espresso: #2A211A;
+
+  --font-logo: "Italianno", cursive;
+  --font-title: "Cormorant Garamond", serif;
+  --font-serif: "EB Garamond", serif;
+  --font-jost: "Jost", sans-serif;
+}
+
+/* ═══════════════════════════════════════════
+   GLOBAL RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis controls this */
+}
+
+body {
+  background-color: #F4EEE2;
+  color: #2A211A;
+  font-family: "EB Garamond", serif;
+  overflow-x: hidden;
+  cursor: none; /* We use custom cursor */
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM LUXURY SCROLLBAR
+   ═══════════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #F4EEE2; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #B08D57, #5C6B3D); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3F4A29; }
+
+/* ═══════════════════════════════════════════
+   FILM GRAIN OVERLAY
+   ═══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+   ═══════════════════════════════════════════ */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #B08D57;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  mix-blend-mode: multiply;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(176, 141, 87, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, border-color 0.3s ease;
+}
+
+.cursor-ring.hovered {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(176, 141, 87, 0.9);
+  background: rgba(176, 141, 87, 0.05);
+}
+
+/* ═══════════════════════════════════════════
+   SELECTION STYLE
+   ═══════════════════════════════════════════ */
+::selection {
+  background: rgba(176, 141, 87, 0.25);
+  color: #2A211A;
+}
+
+/* ═══════════════════════════════════════════
+   FONT HELPERS
+   ═══════════════════════════════════════════ */
+.font-logo  { font-family: "Italianno", cursive; }
+.font-title { font-family: "Cormorant Garamond", serif; }
+.font-serif { font-family: "EB Garamond", serif; }
+.font-jost  { font-family: "Jost", sans-serif; }
+
+/* ═══════════════════════════════════════════
+   GLASSMORPHISM
+   ═══════════════════════════════════════════ */
+.glass-nav {
+  background-color: rgba(244, 238, 226, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(176, 141, 87, 0.15);
+}
+
+.glass-card {
+  background-color: rgba(236, 227, 210, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(176, 141, 87, 0.15);
+}
+
+.glass-card-dark {
+  background-color: rgba(42, 33, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ═══════════════════════════════════════════
+   CINEMATIC PINNED SECTIONS
+   ═══════════════════════════════════════════ */
+.pin-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.cinematic-scene {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL-DRIVEN ANIMATIONS (CSS)
+   ═══════════════════════════════════════════ */
+@supports (animation-timeline: scroll()) {
+  .scroll-reveal {
+    animation: revealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   GSAP SPLIT TEXT LINES
+   ═══════════════════════════════════════════ */
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+.split-line span {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+}
+
+/* ═══════════════════════════════════════════
+   PAPER TEXTURE
+   ═══════════════════════════════════════════ */
+.paper-texture {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23F4EEE2'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23B08D57' opacity='0.04'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23B08D57' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════
+   INGREDIENT EXPLOSION SCENE
+   ═══════════════════════════════════════════ */
+.ingredient-item {
+  position: absolute;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%);
+}
+
+/* ═══════════════════════════════════════════
+   MAGNETIC BUTTON
+   ═══════════════════════════════════════════ */
+.magnetic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.magnetic-btn::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: inherit;
+}
+
+/* ═══════════════════════════════════════════
+   RIPPLE EFFECT
+   ═══════════════════════════════════════════ */
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(176, 141, 87, 0.3);
+  transform: scale(0);
+  animation: rippleEffect 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATED UNDERLINE
+   ═══════════════════════════════════════════ */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #B08D57, #5C6B3D);
+  transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════
+   LIGHT GLOW EFFECTS
+   ═══════════════════════════════════════════ */
+.gold-glow {
+  box-shadow: 0 0 30px rgba(176, 141, 87, 0.2), 0 0 60px rgba(176, 141, 87, 0.1);
+}
+
+.gold-glow-text {
+  text-shadow: 0 0 30px rgba(176, 141, 87, 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   GRADIENT MOVEMENT
+   ═══════════════════════════════════════════ */
+.gradient-move {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ═══════════════════════════════════════════
+   FLOATING ANIMATIONS
+   ═══════════════════════════════════════════ */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(2deg); }
+  66% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(8px); }
+  50% { transform: translateY(-10px) translateX(-5px); }
+  75% { transform: translateY(-18px) translateX(4px); }
+}
+
+@keyframes particleDrift {
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
+}
+
+.float-gentle { animation: floatGentle 7s ease-in-out infinite; }
+.float-slow   { animation: floatSlow 11s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════
+   SCROLL PINNING (helper for GSAP)
+   ═══════════════════════════════════════════ */
+.gsap-pin-spacer {
+  display: block;
+}
+
+/* ═══════════════════════════════════════════
+   HORIZONTAL SCROLL SECTION
+   ═══════════════════════════════════════════ */
+.horizontal-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+}
+
+/* ═══════════════════════════════════════════
+   PILLAR CARDS
+   ═══════════════════════════════════════════ */
+.pillar-card {
+  border-right: 1px solid rgba(42, 33, 26, 0.1);
+  padding: 0 32px;
+}
+.pillar-card:last-child { border-right: none; }
+
+/* ═══════════════════════════════════════════
+   HERO ARCH
+   ═══════════════════════════════════════════ */
+.hero-arch {
+  border-radius: 210px 210px 0 0;
+  border: 1px solid #B08D57;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   NO SCROLLBAR
+   ═══════════════════════════════════════════ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ═══════════════════════════════════════════
+   HOVER EFFECTS
+   ═══════════════════════════════════════════ */
+.hover-gold-grow {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-gold-grow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -10px rgba(176, 141, 87, 0.25);
+}
+
+/* ═══════════════════════════════════════════
+   SVG PATH DRAWING
+   ═══════════════════════════════════════════ */
+.draw-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2s ease;
+}
+.draw-path.drawn { stroke-dashoffset: 0; }
+
+/* ═══════════════════════════════════════════
+   IMAGE REVEAL EFFECT
+   ═══════════════════════════════════════════ */
+.image-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.image-reveal.revealed { clip-path: inset(0% 0 0 0); }
+
+/* ═══════════════════════════════════════════
+   COUNTER ANIMATION
+   ═══════════════════════════════════════════ */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   DUST PARTICLES
+   ═══════════════════════════════════════════ */
+.dust-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(176, 141, 87, 0.4);
+  animation: particleDrift linear infinite;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION TRANSITIONS
+   ═══════════════════════════════════════════ */
+.section-transition {
+  position: relative;
+}
+
+.section-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--tw-bg-opacity, #F4EEE2), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   MOTION BLUR ON SCROLL (CSS ONLY APPROACH)
+   ═══════════════════════════════════════════ */
+.motion-blur-child {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   PERSPECTIVE DEPTH
+   ═══════════════════════════════════════════ */
+.perspective-container {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+/* ═══════════════════════════════════════════
+   LOADING BAR
+   ═══════════════════════════════════════════ */
+.loading-bar {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #B08D57, #5C6B3D, #B08D57, transparent);
+  animation: loadingProgress 2s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+  from { width: 0%; opacity: 1; }
+  80% { width: 90%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   TEXT SCRAMBLE EFFECT (pure CSS)
+   ═══════════════════════════════════════════ */
+.text-shimmer {
+  background: linear-gradient(90deg, #2A211A 0%, #B08D57 50%, #2A211A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 0% center; }
+  to { background-position: 200% center; }
+}
+
+/* ═══════════════════════════════════════════
+   LENIS SMOOTH SCROLL HELPER
+   ═══════════════════════════════════════════ */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}

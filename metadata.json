@@ -1,0 +1,6 @@
+{
+  "name": "Maison THYNA",
+  "description": "A premium storytelling and workshop reservation website for Maison THYNA, a heritage cookie experience in Djerba, Tunisia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
